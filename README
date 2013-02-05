@@ -1,0 +1,5 @@
+* fast_cluster *
+
+Cluster documents using LSH in linear time.
+make
+./fast_cluster <file> <ngrams>
