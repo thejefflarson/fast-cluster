@@ -2,8 +2,10 @@
 #include <hasher.h>
 #include <set>
 #include <vector>
+#include <iostream>
 
-namespace std {
+using namespace std;
+
 namespace fast_cluster {
 
 typedef vector<string> Ngrams;
@@ -37,8 +39,9 @@ int64_t SimHash(const string& buf, int grams_count, int iters) {
   int64_t hash = 0;
   set<int64_t> hashes;
 
-  for(Ngrams::iterator it = grams.begin(); it != grams.end(); ++it)
+  for(Ngrams::iterator it = grams.begin(); it != grams.end(); ++it) {
     hashes.insert(CityHash64(it->c_str(), it->length()));
+  }
 
   int i = 0;
   for(set<int64_t>::iterator hit = hashes.begin(); hit != hashes.end(); ++hit, i++) {
@@ -50,4 +53,4 @@ int64_t SimHash(const string& buf, int grams_count, int iters) {
 }
 
 }
-}
+
