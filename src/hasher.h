@@ -1,13 +1,13 @@
 #ifndef FAST_CLUSTER_HASHER_H
 #define FAST_CLUSTER_HASHER_H
 
-#include "utils.h"
-#include ""
+#include <string>
+#include <stdint.h>
 
 namespace std {
 namespace fast_cluster {
 
-Status SimHash(const std::string buf);
+int64_t SimHash(const std::string &buf, int count = 10, int iters = 10);
 
 }
 }
