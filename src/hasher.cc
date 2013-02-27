@@ -1,7 +1,8 @@
 #include <city.h>
 #include <hasher.h>
-#include <set>
 #include <vector>
+#include <set>
+#include <algorithm>
 #include <iostream>
 
 using namespace std;
@@ -34,21 +35,17 @@ Ngrams ngrams(const string& buf, int num){
   return grams;
 }
 
-int64_t SimHash(const string& buf, int grams_count, int iters) {
+int32_t SimHash(const string& buf, int grams_count) {
   Ngrams grams = ngrams(buf, grams_count);
-  int64_t hash = 0;
-  set<int64_t> hashes;
+  vector<int32_t> hashes;
 
   for(Ngrams::iterator it = grams.begin(); it != grams.end(); ++it)
-    hashes.insert(CityHash64(it->c_str(), it->length()));
+    if(it->length() > 0)
+      hashes.push_back(CityHash32(it->c_str(), it->length()));
 
-  int i = 0;
-  for(set<int64_t>::iterator hit = hashes.begin(); hit != hashes.end(); ++hit, i++) {
-    hash ^= *hit;
-    if(i >= iters) break;
-  }
+  sort(hashes.begin(), hashes.end());
 
-  return hash;
+  return hashes.front();
 }
 
 }

@@ -6,7 +6,7 @@
 
 namespace fast_cluster {
 
-int64_t SimHash(const std::string &buf, int count = 10, int iters = 10);
+int32_t SimHash(const std::string &buf, int count = 10);
 
 }
 #endif
