@@ -1,5 +1,11 @@
 * fast_cluster *
 
 Cluster documents using LSH in linear time.
-make
-./fast_cluster <file> <ngrams>
+
+$ make
+$ ./fast_cluster <file> <ngrams>
+
+example:
+$ find path_to_documents | xargs -I{} ./fast_cluster {} 5 | cut -f1 | sort -n | uniq -c
+... list of count id pairs ...
+$ find path_to_documents | grep '<interesting_id>'
